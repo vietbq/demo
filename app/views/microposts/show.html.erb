@@ -14,7 +14,7 @@
 			<h4>Add Comment:</h4>
 		    <%= form_for(@comment, remote: true, :url => micropost_comments_path(@micropost)) do |f| %>
 		        <%= f.text_area :content, placeholder: "Compose new comment...", class: "form-control", :id => "comment-text-field-id" %>
-		        <%= f.submit "Submit", class: "btn btn-primary" %>
+		        <%= f.submit "Comment", class: "btn btn-primary" %>
 		    <% end %>
 		<% else %>
 			<h4>Login to comment</h4>
