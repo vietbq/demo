@@ -1,0 +1,37 @@
+<% provide(:title, 'Entry') %>
+<div class="row">
+	<div class="col-md-8 col-sm-8 col-xs-12">
+		<h1 style="text-align: left;"><%= @micropost.title %></h1>
+		<span class="timestamp">
+			Posted <%= time_ago_in_words(@micropost.created_at) %> ago by <%= link_to @micropost.user.name, @micropost.user %>
+		</span>
+		<p class="well" style="margin-top: 10px" >
+			<%=  @micropost.content %>
+			<br>
+			<%= image_tag(@micropost.picture.url,:width => "400", :height => "100%")  if @micropost.picture? %>
+		</p>
+		<% if logged_in? %>
+			<h4>Add Comment:</h4>
+		    <%= form_for(@comment, remote: true, :url => micropost_comments_path(@micropost)) do |f| %>
+		        <%= f.text_area :content, placeholder: "Compose new comment...", class: "form-control", :id => "comment-text-field-id" %>
+		        <%= f.submit "Submit", class: "btn btn-primary" %>
+		    <% end %>
+		<% else %>
+			<h4>Login to comment</h4>
+		<% end %>
+	    <ol class="comments" id="comment_id">
+			<% if @comments.any? %>
+			    <%= render @comments %>
+			<% end %>
+		</ol>
+	</div>
+	<div class="col-md-4 col-sm-4 col-xs-12 microposts">
+		<h1>Micropost Feed</h1>
+		<% @microposts.each do |post|  %>
+				<span class="title" style="padding-left: 60px; font-size: 15px">
+					<%= link_to post.title,  post %> posted by <%= link_to post.user.name, post.user %><hr>
+				</span>
+
+		<% end %>
+	</div>
+</div>

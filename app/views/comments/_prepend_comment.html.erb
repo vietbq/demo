@@ -1,0 +1,14 @@
+<li id="comment-<%= @comment.id %>">
+	  <%= link_to gravatar_for(@comment.user, size: 50), @comment.user %>
+	  <span class="user"><%= link_to @comment.user.name, @comment.user %></span>
+	  <span class="content"><%= @comment.content %></span>
+	  <span class="timestamp">
+	    Posted <%= time_ago_in_words(@comment.created_at) %> ago.
+	    <% if current_user?(@comment.user) || current_user?(@comment.micropost.user) %>
+	        <div style="float: right">
+	  			<%= link_to "", micropost_comment_path(@comment.micropost,@comment), method: :delete,
+                                         data: { confirm: "Are you sure?" }, :title =>"Delete", :class => "glyphicon glyphicon-trash", :style=>'color: red' %>
+                                         </div>
+	  	<% end %>
+	  </span>
+</li>

@@ -1,0 +1,17 @@
+<li id="micropost-<%= micropost.id %>">
+  <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
+  <span class="title"><%= link_to micropost.title,  micropost %></span>
+  <span class="content"><%= micropost.content %></span>
+  <%= image_tag(micropost.picture.url,:width => "400", :height => "100%")  if micropost.picture? %>
+  <span class="timestamp">
+    <span class="user"><%= link_to micropost.user.name, micropost.user %></span> posted <%= time_ago_in_words(micropost.created_at) %> ago.
+    <% if current_user?(micropost.user) %>
+      <div style="float: right">
+        <%= link_to "", edit_micropost_path(micropost), :title =>"Edit", :class => "glyphicon glyphicon-pencil"  %>&nbsp;
+        <%= link_to "", micropost, method: :delete,
+                                         data: { confirm: "You sure?" }, :title =>"Delete", :class => "glyphicon glyphicon-trash", :style=>'color: red' %>
+        
+      </div>
+    <% end %>
+  </span>
+</li>

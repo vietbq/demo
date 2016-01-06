@@ -1,0 +1,8 @@
+<% provide(:title, 'Entries') %>
+<h1>Entries</h1>
+<%= will_paginate @posts %>
+<% @posts.each do |post| %>
+	<% @post = post %>
+	  <%= render "microposts/post" %>
+<% end %>
+<%= will_paginate @posts %>

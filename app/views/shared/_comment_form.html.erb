@@ -1,0 +1,6 @@
+
+    <h4>Add Comment:</h4>
+    <%= form_for(@comment, remote: true, :url => micropost_comments_path(@micropost)) do |f| %>
+        <%= f.text_area :content, placeholder: "Compose new comment...", class: "form-control" %>
+        <%= f.submit "Submit", class: "btn btn-primary" %>
+    <% end %>
